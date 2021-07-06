@@ -8,6 +8,12 @@ Usage:
 <script type="application/javascript" src="src/phonemask.js"></script>
 ```
 
+or
+
+```js
+<script type="application/javascript" src="src/phonemask.min.js"></script>
+```
+
 2. Adding a phone input field to HTML
 
 ```html
