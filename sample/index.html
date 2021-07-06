@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example work "phonemask" library</title>
+    <script type="text/javascript" src="../src/phonemask.js"></script>
+</head>
+<body>
+    <form action="">
+        <label for="phone">Phone: </label>
+        <input type="text" class="form-control" id="phone" name="phone" value="+38 (0__) ___ - __ - __" mask="+38 (0__) ___ - __ - __" placeholder="+38 (0__) ___ - __ - __">
+    </form>
+    <script type="text/javascript">
+        const cssPhone = 'input[name="phone"';
+        (new phoneMask()).init(cssPhone);
+    </script>
+</body>
+</html>
