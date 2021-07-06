@@ -1,4 +1,13 @@
-var phoneMask = function () {
+/**
+ * Library: neovav/phonemask
+ *
+ * Source: https://github.com/neovav/phonemask
+ *
+ * Licensed (Apache 2.0)
+ *
+ * Copyright © Verveda Oleksandr Viktorovich <neovav@outlook.com>
+ */
+const phoneMask = function () {
     const parent = this
 
     let listDigits = [
@@ -7,6 +16,13 @@ var phoneMask = function () {
 
     let listTags = []
 
+    /**
+     * Check if a phone format handler is assigned to the specified tag
+     *
+     * @param {HTMLInputElement} tag
+     *
+     * @return {boolean}
+     */
     function checkEvent (tag) {
         let ret = false
         const keys = Object.keys(listTags)
@@ -20,6 +36,13 @@ var phoneMask = function () {
         return ret
     }
 
+    /**
+     * Getting the cursor position in a phone input field
+     *
+     * @param {HTMLInputElement} tag
+     *
+     * @return {int}
+     */
     this.getCursorPosition = function ( tag ) {
         let CaretPos = 0;
 
@@ -39,6 +62,12 @@ var phoneMask = function () {
         return CaretPos;
     }
 
+    /**
+     * Setting the cursor position in the telephone input field
+     *
+     * @param {HTMLInputElement} tag
+     * @param {int} pos
+     */
     this.setCursorPosition = function(tag, pos) {
         try {
             if ( document.createRange ) {
@@ -53,6 +82,15 @@ var phoneMask = function () {
         }
     }
 
+    /**
+     * Search in a mask for a position to insert a digit
+     *
+     * @param {HTMLInputElement} tag
+     * @param {string} mask
+     * @param {int} step
+     *
+     * @return {int}
+     */
     this.searchPosition = function (tag, mask, step = 1) {
         let ret = parent.getCursorPosition(tag)
 
@@ -79,6 +117,12 @@ var phoneMask = function () {
         return ret
     }
 
+    /**
+     * Focus and click handler in the phone input field
+     *
+     * @param {HTMLInputElement} tag
+     * @param {string} mask
+     */
     function correctPosition (tag, mask) {
         try {
             let position = parent.getCursorPosition(tag)
@@ -93,6 +137,15 @@ var phoneMask = function () {
         }
     }
 
+    /**
+     * Handler for inserting text into a phone input field
+     *
+     * @param {ClipboardEvent} event
+     * @param {HTMLInputElement} tag
+     * @param {string} mask
+     *
+     * @return {void}
+     */
     function paste (event, tag, mask) {
         let value = tag.getAttribute('value')
         let arrValue = value.split('');
@@ -130,6 +183,15 @@ var phoneMask = function () {
         parent.setCursorPosition(tag, newPosition)
     }
 
+    /**
+     * Handler for pressing a key in a phone input field
+     *
+     * @param {KeyboardEvent} event
+     * @param {HTMLInputElement} tag
+     * @param {string} mask
+     *
+     * @return {int}
+     */
     function keyDown (event, tag, mask) {
         const lenMask = mask.length
         let position = parent.getCursorPosition(tag)
@@ -184,6 +246,13 @@ var phoneMask = function () {
         }
     }
 
+    /**
+     * Initialization of phone input field handlers
+     *
+     * @param {string} css
+     *
+     * @return {int}
+     */
     this.init = function (css) {
         const list = document.querySelectorAll(css)
         const keys = Object.keys(list)
@@ -200,11 +269,11 @@ var phoneMask = function () {
                         paste (event, tag, mask)
                         event.preventDefault();
                     })
-                    tag.addEventListener('focus', (event) => {
+                    tag.addEventListener('focus', () => {
                         correctPosition (tag, mask)
                         return true
                     })
-                    tag.addEventListener('click', (event) => {
+                    tag.addEventListener('click', () => {
                         correctPosition (tag, mask)
                         return true
                     })
@@ -223,5 +292,7 @@ var phoneMask = function () {
                 console.log(e)
             }
         }
+
+        return parent
     }
 }
